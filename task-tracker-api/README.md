@@ -39,3 +39,46 @@ docker exec -it task-tracker-api bash
 rails generate model Task description:string
 rails db:migrate
 rails s -b 0.0.0.0
+
+
+
+7) Probar los endpoints con curl
+
+Crear una tarea (POST /tasks):
+
+curl -X POST http://localhost:3000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"task": {"description": "Comprar leche"}}'
+
+
+Respuesta esperada (status 201):
+
+{
+  "id": 1,
+  "description": "Comprar leche",
+  "created_at": "2025-11-24T12:34:56.000Z",
+  "updated_at": "2025-11-24T12:34:56.000Z"
+}
+
+
+Listar tareas (GET /tasks):
+
+curl http://localhost:3000/tasks
+
+
+Respuesta esperada (lista ordenada por created_at descendente):
+
+[
+  {
+    "id": 2,
+    "description": "Otra tarea",
+    "created_at": "...",
+    "updated_at": "..."
+  },
+  {
+    "id": 1,
+    "description": "Comprar leche",
+    "created_at": "...",
+    "updated_at": "..."
+  }
+]
