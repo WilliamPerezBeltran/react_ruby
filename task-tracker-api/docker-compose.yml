@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task-tracker-api
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - .:/rails
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
