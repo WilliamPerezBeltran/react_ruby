@@ -52,6 +52,11 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_model_serializers (0.10.15)
+      actionpack (>= 4.1)
+      activemodel (>= 4.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (7.1.6)
       activesupport (= 7.1.6)
       globalid (>= 0.3.6)
@@ -86,6 +91,8 @@ GEM
     bootsnap (1.19.0)
       msgpack (~> 1.2)
     builder (3.3.0)
+    case_transform (0.2)
+      activesupport
     cgi (0.5.0)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.4)
@@ -94,6 +101,7 @@ GEM
     debug (1.11.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diff-lcs (1.6.2)
     drb (2.2.3)
     erb (6.0.0)
     erubi (1.13.1)
@@ -106,6 +114,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    jsonapi-renderer (0.2.2)
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -202,6 +211,23 @@ GEM
       tsort
     reline (0.6.3)
       io-console (~> 0.5)
+    rspec-core (3.13.6)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.7)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.1.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.6)
     securerandom (0.4.1)
     sqlite3 (2.8.0-aarch64-linux-gnu)
     sqlite3 (2.8.0-aarch64-linux-musl)
@@ -235,10 +261,12 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.0)
   bootsnap
   debug
   puma (>= 5.0)
   rails (~> 7.1.6)
+  rspec-rails
   sqlite3 (>= 1.4)
   tzinfo-data
 
