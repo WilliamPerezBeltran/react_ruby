@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-  # POST /tasks
   def create
     task = Task.new(task_params)
 
@@ -10,7 +9,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks
   def index
     tasks = Task.order(created_at: :desc)
     render json: tasks

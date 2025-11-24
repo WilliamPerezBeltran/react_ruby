@@ -1,84 +1,96 @@
--# README
--Construir la imagen
-- docker compose build 
--Crear la base de datos (necesario SOLO la primera vez)
-- docker compose run api rails db:prepare
--Levantar el servidor Rails
-- docker compose up
-+Ejecutar SIEMPRE Rails dentro del contenedor, no en tu laptop.
- 
--
--TODO sucede dentro del contenedor
--
--Para correr RSpec:
-+Entra al contenedor:
- 
- docker exec -it task-tracker-api bash
--bundle exec rspec
- 
- 
--Para instalar una gema:
--
--docker exec -it task-tracker-api bash
--bundle add nombre_gema
-+Adentro del contenedor, ejecuta:
- 
--
--Para instalar dependencias nuevas:
--
--docker exec -it task-tracker-api bash
--bundle install
-\ No newline at end of file
-+rails generate model Task description:string
-\ No newline at end of file
+# README
 
+## Build the image
 
+``` bash
+docker compose build
+```
 
-docker compose up -d
+## Create the database (only needed the first time)
+
+``` bash
+docker compose run api rails db:prepare
+```
+
+## Start the Rails server
+
+``` bash
+docker compose up
+```
+
+Rails must always be executed inside the container, not on your local
+machine.
+
+## Enter the container
+
+``` bash
 docker exec -it task-tracker-api bash
+```
+
+## Generate the Task model
+
+Inside the container:
+
+``` bash
 rails generate model Task description:string
 rails db:migrate
 rails s -b 0.0.0.0
+```
 
+## Test the endpoints using curl
 
+### Create a task (POST /tasks)
 
-7) Probar los endpoints con curl
+``` bash
+curl -X POST http://localhost:3000/tasks   -H "Content-Type: application/json"   -d '{"task": {"description": "Buy milk"}}'
+```
 
-Crear una tarea (POST /tasks):
+### Expected response (status 201)
 
-curl -X POST http://localhost:3000/tasks \
-  -H "Content-Type: application/json" \
-  -d '{"task": {"description": "Comprar leche"}}'
-
-
-Respuesta esperada (status 201):
-
+``` json
 {
   "id": 1,
-  "description": "Comprar leche",
+  "description": "Buy milk",
   "created_at": "2025-11-24T12:34:56.000Z",
   "updated_at": "2025-11-24T12:34:56.000Z"
 }
+```
 
+### List tasks (GET /tasks)
 
-Listar tareas (GET /tasks):
-
+``` bash
 curl http://localhost:3000/tasks
+```
 
+### Expected response (ordered by created_at desc)
 
-Respuesta esperada (lista ordenada por created_at descendente):
-
+``` json
 [
   {
     "id": 2,
-    "description": "Otra tarea",
+    "description": "Another task",
     "created_at": "...",
     "updated_at": "..."
   },
   {
     "id": 1,
-    "description": "Comprar leche",
+    "description": "Buy milk",
     "created_at": "...",
     "updated_at": "..."
   }
 ]
+```
+
+## Load seeds
+
+### Without Docker
+
+``` bash
+rails db:seed
+```
+
+### With Docker
+
+``` bash
+docker compose run api rails db:seed
+```
