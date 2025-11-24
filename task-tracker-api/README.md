@@ -94,3 +94,9 @@ rails db:seed
 ``` bash
 docker compose run api rails db:seed
 ```
+
+
+
+rails db:drop db:create db:migrate db:seed
+bundle exec rspec
+
