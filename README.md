@@ -6,13 +6,14 @@ Project Structure
 The instructions for setting up the projects are in each front-end and back-end repository readme.
 
 The project is structured in a mono-repo with separate directories for backend and frontend:
+ ```
 
 task-tracker/
 ├── task-tracker-api/          # Rails API
 └── task-tracker-frontend/     # React SPA
 └── README
 
-
+```
 Reasoning:
 
 Keeping backend and frontend separate makes the responsibilities clear. Rails handles API requests and database persistence, while React handles the user interface and frontend logic.
