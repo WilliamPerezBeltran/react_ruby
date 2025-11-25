@@ -28,7 +28,8 @@ npm install
 2. Start the development server:
 
 ```bash
-npm start
+PORT=3001 npm start
+
 ```
 
 * The frontend will run by default on `http://localhost:3001`
